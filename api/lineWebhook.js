@@ -1,5 +1,5 @@
 require('dotenv').config();
-const axios = require("axios");
+import axios from 'axios';
 
 async function sendMessage(replyToken, message){
     try{
