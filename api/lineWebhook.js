@@ -21,7 +21,7 @@ async function sendMessage(replyToken, message){
             console.log(`Failed to send message: ${message}`)
         }
     }catch(error){
-
+        throw new Error('func sendMessage Error: ', error);
     }
 }
 
