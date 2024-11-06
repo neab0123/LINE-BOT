@@ -5,13 +5,14 @@ async function sendMessage(replyToken, message){
         const response = await fetch("https://api.line.me/v2/bot/message/reply", {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
             },
             body: JSON.stringify({
                 replyToken: replyToken,
                 messages: [{
-                    type: 'text',
-                    text: `You said: ${message}`
+                    type: "text",
+                    text: message
                 }]
             })
         })
