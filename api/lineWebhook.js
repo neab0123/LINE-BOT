@@ -21,7 +21,7 @@ async function sendMessage(replyToken, message){
 }
 
 export default async function handler(req, res){
-    if(req.meyhod === "POST"){
+    if(req.method === "POST"){
         const events = req.body.events;
         if(events && events.length > 0){
             const { replyToken, message } = events[0];
