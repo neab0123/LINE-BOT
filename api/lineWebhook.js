@@ -17,6 +17,8 @@ async function sendMessage(replyToken, message){
             })
         })
 
+        console.log(response)
+
         if(!response.ok){
             console.log(`Failed to send message: ${message}`)
         }
