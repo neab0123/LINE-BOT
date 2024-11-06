@@ -3,17 +3,17 @@ require('dotenv').config();
 async function sendMessage(replyToken, message){
     try{
         await fetch("https://api.line.me/v2/bot/message/reply", {
-            method: "POST"
-        },{
-            replyToken,
-            messages: [{
-                type: "text",
-                text: message
-            }]
-        }, {
+            method: 'POST',
             headers: {
-                Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
-            }
+                'Authorization': `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
+            },
+            body: JSON.stringify({
+                replyToken: replyToken,
+                messages: [{
+                    type: 'text',
+                    text: `You said: ${message}`
+                }]
+            })
         })
     }catch(error){
 
@@ -23,6 +23,7 @@ async function sendMessage(replyToken, message){
 export default async function handler(req, res){
     if(req.method === "POST"){
         const events = req.body.events;
+        console.log(events)
         if(events && events.length > 0){
             const { replyToken, message } = events[0];
             const userMessage = message.text;
