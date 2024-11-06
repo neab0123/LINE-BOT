@@ -2,8 +2,7 @@ require('dotenv').config();
 
 async function sendMessage(replyToken, message){
     try{
-        console.log(process.env.CHANNEL_ACCESS_TOKEN)
-        await fetch("https://api.line.me/v2/bot/message/reply", {
+        const response = await fetch("https://api.line.me/v2/bot/message/reply", {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
@@ -16,6 +15,10 @@ async function sendMessage(replyToken, message){
                 }]
             })
         })
+
+        if(!response.ok){
+            console.log(`Failed to send message: ${message}`)
+        }
     }catch(error){
 
     }
