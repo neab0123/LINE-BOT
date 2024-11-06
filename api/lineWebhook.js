@@ -1,9 +1,10 @@
 require('dotenv').config();
-import axios from 'axios';
 
 async function sendMessage(replyToken, message){
     try{
-        await axios.post("https://api.line.me/v2/bot/message/reply", {
+        await fetch("https://api.line.me/v2/bot/message/reply", {
+            method: "POST"
+        },{
             replyToken,
             messages: [{
                 type: "text",
