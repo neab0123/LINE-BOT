@@ -34,8 +34,9 @@ export default async function handler(req, res){
             const { replyToken, message, source } = events[0];
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
+            const sendUserId = "Send your userId:" + source.userId
             if(source.type == 'user'){
-                await sendMessage(source.userId, "Send your userId:" + source.userId);
+                await sendMessage(source.userId, sendUserId);
             }
             await sendMessage(replyToken, replyMessage);
         }
