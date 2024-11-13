@@ -31,11 +31,11 @@ export default async function handler(req, res){
     if(req.method === "POST"){
         const events = req.body.events;
         if(events && events.length > 0){
-            const { replyToken, message } = events[0];
+            const { replyToken, message, source } = events[0];
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
-            if(events.source.type == 'user'){
-                await sendMessage(events.source.userId, `Send your userId: ${events.source.userId}`);
+            if(source.type == 'user'){
+                await sendMessage(source.userId, `Send your userId: ${source.userId}`);
             }
             await sendMessage(replyToken, replyMessage);
         }
