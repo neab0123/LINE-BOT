@@ -2,14 +2,14 @@ require('dotenv').config();
 
 async function sendMessage(replyToken, message){
     try{
-        const response = await fetch("https://api.line.me/v2/bot/message/reply", {
+        const response = await fetch("https://api.line.me/v2/bot/message/push", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
             },
             body: JSON.stringify({
-                replyToken: replyToken,
+                to: replyToken,
                 messages: [{
                     type: "text",
                     text: message
