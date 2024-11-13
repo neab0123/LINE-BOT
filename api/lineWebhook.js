@@ -30,11 +30,13 @@ async function sendMessage(replyToken, message){
 export default async function handler(req, res){
     if(req.method === "POST"){
         const events = req.body.events;
-        console.log(events);
         if(events && events.length > 0){
             const { replyToken, message } = events[0];
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
+            if(events.source.type == 'user'){
+                await sendMessage(events.source.userId, `Send your userId: ${events.source.userId}`);
+            }
             await sendMessage(replyToken, replyMessage);
         }
         res.status(200).send("OK");
