@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 
 require('dotenv').config();
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,4 +21,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
+async function createUser(data){
+    try{
+        const memberCol = collection(db, "line-noti-register");
+        const memberSnapshot = await getDocs(memberCol);
+        const memberList = memberSnapshot.docs.map(doc => doc.data())
+        console.log(memberList);
+        return response;
+    }catch(e){
+        console.log("createUser Error: ", e);
+    }
+}
+
+export {
+    createUser
+}
