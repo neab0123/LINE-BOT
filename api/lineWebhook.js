@@ -1,3 +1,5 @@
+import { createUser } from '../db/line_register.db';
+
 require('dotenv').config();
 
 async function sendMessage(replyToken, message){
@@ -31,6 +33,7 @@ export default async function handler(req, res){
     if(req.method === "POST"){
         const events = req.body.events;
         if(events && events.length > 0){
+            // replytoken for use reply api, userId for use push api
             const { replyToken, message, source } = events[0];
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
@@ -38,7 +41,11 @@ export default async function handler(req, res){
             if(source.type == 'user'){
                 await sendMessage(source.userId, sendUserId);
             }
-            await sendMessage(replyToken, replyMessage);
+
+            if(userMessage == 'สมัคร'){
+                await createUser({ line_id: source.userId })
+            }
+            // await sendMessage(replyToken, replyMessage);
         }
         res.status(200).send("OK");
     }else{
