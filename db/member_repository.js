@@ -5,7 +5,7 @@ async function createUser(data){
     try{
         firebase.firestore().collection("line-noti-register").add(data)
     }catch(e){
-
+        console.log("createUser Error: ", e);
     }
 }
 
