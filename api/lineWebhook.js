@@ -38,9 +38,9 @@ export default async function handler(req, res){
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
             const sendUserId = "Send your userId:" + source.userId
-            if(source.type == 'user'){
-                await sendMessage(source.userId, sendUserId);
-            }
+            // if(source.type == 'user'){
+            //     await sendMessage(source.userId, sendUserId);
+            // }
 
             if(userMessage == 'สมัคร'){
                 const res = await createUser({ line_id: source.userId })
