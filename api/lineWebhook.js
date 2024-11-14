@@ -1,5 +1,4 @@
-import { createUser } from '../db/connection';
-
+import { createUser } from '../db/member_repository';
 
 require('dotenv').config();
 
