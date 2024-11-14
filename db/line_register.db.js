@@ -9,6 +9,7 @@ async function createUser(data){
             shipped_address: "",
             shipped_name: ""
         })
+        return response;
     }catch(e){
 
     }
