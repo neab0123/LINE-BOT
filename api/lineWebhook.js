@@ -42,7 +42,7 @@ export default async function handler(req, res){
             // if(source.type == 'user'){
             //     await sendMessage(source.userId, sendUserId);
             // }
-            console.log(source);
+            console.log(source, events[0]);
             if(userMessage == 'สมัคร'){
                 const message = ""
             }
