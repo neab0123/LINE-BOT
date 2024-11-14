@@ -1,4 +1,4 @@
-import { collection, setDoc, getDocs } from "firebase/firestore";
+import { collection, setDoc, getDocs } from "firebase/firestore/lite";
 import db from "./connection";
 
 async function createUser(data){
