@@ -1,4 +1,5 @@
-import { createUser } from '../db/line_register.db';
+import { createUser } from '../db/connection';
+
 
 require('dotenv').config();
 
