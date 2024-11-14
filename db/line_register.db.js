@@ -1,5 +1,4 @@
 import db from "./connection";
-import { collection, addDoc } from "firebase/firestore";
 
 async function createUser(data){
     try{
@@ -11,7 +10,7 @@ async function createUser(data){
         })
         return response;
     }catch(e){
-
+        console.log("createUser Error: ", e);
     }
 }
 

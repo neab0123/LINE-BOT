@@ -44,7 +44,6 @@ export default async function handler(req, res){
 
             if(userMessage == 'สมัคร'){
                 const res = await createUser({ line_id: source.userId })
-                await sendMessage(source.userId, res.statusText);
             }
             // await sendMessage(replyToken, replyMessage);
         }
