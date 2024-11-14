@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -11,10 +11,7 @@ const firebaseConfig = {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID
   };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseapp = initializeApp(firebaseConfig);
 
-const firestore = firebase.firestore();
-const settings = {
-    timestampsInSnapshot: true
-}
-firestore.settings(settings);
+const db = getFirestore(firebaseapp);
+export { db }
