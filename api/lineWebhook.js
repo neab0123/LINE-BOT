@@ -42,7 +42,9 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, sendUserId);
             // }
             if(userMessage == 'สมัคร'){
+                const message = "N1 {ชื่อ นามสกุล}\n T1 {เบอร์โทรติดต่อ}\n"
                 const res = await createUser({ line_id: source.userId });
+                await sendMessage(source.userId, message);
                 console.log(res)
             }
             // await sendMessage(replyToken, replyMessage);
