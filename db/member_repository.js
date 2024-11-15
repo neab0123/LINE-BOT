@@ -1,5 +1,5 @@
 import { db } from "./connection";
-import { collection, addDoc, serverTimestamp, query } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, updateDoc, getDoc } from "firebase/firestore";
 
 async function createUser(data){
     try{
@@ -14,9 +14,17 @@ async function createUser(data){
 
 async function updateUser(id, newData){
     try{
-
+        
     }catch(e){
         console.log("updateUser Error: ", e);
+    }
+}
+
+async function getUser(){
+    try{
+
+    }catch(e){
+        
     }
 }
 
