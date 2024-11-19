@@ -1,5 +1,5 @@
 import { db } from "./connection";
-import { collection, addDoc, serverTimestamp, updateDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, updateDoc, getDoc, doc } from "firebase/firestore";
 
 async function createUser(data){
     try{

@@ -49,7 +49,8 @@ export default async function handler(req, res){
             }
 
             if(userMessage.split(" ")[0] == "N1"){
-                
+                const spltText = userMessage.split(" ");
+                console.log(spltText)
             }
             // await sendMessage(replyToken, replyMessage);
         }
