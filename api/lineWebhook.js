@@ -1,4 +1,5 @@
 import { createUser } from '../db/member_repository';
+import { prefix_name } from "../json/prefix-name.json";
 
 require('dotenv').config();
 
@@ -42,15 +43,16 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, sendUserId);
             // }
             if(userMessage == 'สมัคร'){
-                const message = "กรุณากรอกข้อมูลตามรูปแบบดังนี้\nN1 {ชื่อ นามสกุล}\nT1 {เบอร์โทรติดต่อ}"
-                const res = await createUser({ line_id: source.userId });
-                await sendMessage(source.userId, message);
+                const message = "กรุณากรอกข้อมูลตามรูปแบบดังนี้\nชื่อคนติิดต่อ\nเบอร์โทรติดต่อ\nที่อยู่"
+                // const res = await createUser({ line_id: source.userId });
+                // await sendMessage(source.userId, message);
                 console.log(res)
             }
 
             if(userMessage.split(" ")[0] == "N1"){
                 const spltText = userMessage.split(" ");
                 console.log(spltText)
+                const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
             }
             // await sendMessage(replyToken, replyMessage);
         }
