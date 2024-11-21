@@ -42,7 +42,7 @@ export default async function handler(req, res){
             const sendUserId = "Send your userId:" + source.userId
             $.ajax({
                 method: "POST",
-                url:"~/cut-message.py",
+                url:"~/python-func/cut-message.py",
                 data: {
                     param: userMessage
                 }
