@@ -1,5 +1,6 @@
 import { createUser } from '../db/member_repository';
 import { prefix_name } from "../json/prefix-name.json";
+import $ from "jquery";
 
 require('dotenv').config();
 
