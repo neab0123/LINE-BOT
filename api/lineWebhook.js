@@ -39,6 +39,15 @@ export default async function handler(req, res){
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
             const sendUserId = "Send your userId:" + source.userId
+            $.ajax({
+                method: "POST",
+                url:"~/cut-message.py",
+                data: {
+                    param: userMessage
+                }
+            }).done((res) => {
+                console.log(res)
+            })
             // if(source.type == 'user'){
             //     await sendMessage(source.userId, sendUserId);
             // }
