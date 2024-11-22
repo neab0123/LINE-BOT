@@ -1,4 +1,4 @@
-import { createUser, getUser } from '../db/member_repository';
+import { createUser, getUser, updateUser } from '../db/member_repository';
 import { prefix_name } from "../json/prefix-name.json";
 
 require('dotenv').config();
@@ -48,10 +48,11 @@ export default async function handler(req, res){
                 const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
                 await sendMessage(source.userId, message);
-            }else{
-                const message = "คุณได้ลงทะเบียนแล้ว";
-                await sendMessage(source.userId, message)
             }
+            // else{
+            //     const message = "คุณได้ลงทะเบียนแล้ว";
+            //     await sendMessage(source.userId, message)
+            // }
 
             if(userMessage.split(" ")[0] == "N1"){
                 const spltText = userMessage.split(" ");
@@ -60,6 +61,7 @@ export default async function handler(req, res){
             }
             if(findUser[0].state == "awaiting for register name"){
                 const message = ""
+                const res = await updateUser(source.userId, { name: userMessage })
             }
             // await sendMessage(replyToken, replyMessage);
         }

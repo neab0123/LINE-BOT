@@ -15,7 +15,11 @@ async function createUser(data){
 
 async function updateUser(id, newData){
     try{
-        
+        const find = await getUserId(id);
+        const ref = doc(db, "line-noti-register", find)
+        await updateDoc(ref, {
+            name: newData.name
+        })
     }catch(e){
         console.log("updateUser Error: ", e);
     }
@@ -35,7 +39,20 @@ async function getUser(userId){
     }
 }
 
+async function getUserId(lineId){
+    try{
+        const q = query(collection(db, "line-noti-register"), where("line_id", "==", lineId))
+        const snapshot = await getDocs(q);
+        let users = ""
+        snapshot.forEach((doc) => users = doc.Id)
+        return users
+    }catch(e){
+
+    }
+}
+
 export {
     createUser,
-    getUser
+    getUser,
+    updateUser
 }
