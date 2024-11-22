@@ -48,6 +48,7 @@ export default async function handler(req, res){
                 const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
                 await sendMessage(source.userId, message);
+                return;
             }
             // else{
             //     const message = "คุณได้ลงทะเบียนแล้ว";
@@ -62,6 +63,7 @@ export default async function handler(req, res){
             if(findUser[0].state == "awaiting for register name"){
                 const message = ""
                 const res = await updateUser(source.userId, { name: userMessage })
+                return;
             }
             // await sendMessage(replyToken, replyMessage);
         }
