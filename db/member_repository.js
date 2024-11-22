@@ -1,10 +1,11 @@
 import { db } from "./connection";
-import { collection, addDoc, serverTimestamp, updateDoc, getDoc, doc, query, where } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, updateDoc, doc, query, where, getDocs } from "firebase/firestore";
 
 async function createUser(data){
     try{
         return await addDoc(collection(db, "line-noti-register"), {
             line_id: data.line_id,
+            state: data.state,
             timestamp: serverTimestamp()
         }).then((res) => res)
     }catch(e){
@@ -23,8 +24,7 @@ async function updateUser(id, newData){
 async function getUser(userId){
     try{
         const q = query(collection(db, "line-noti-register"), where("line_id", "==", userId))
-        return await getDoc(q).forEach(doc => {
-            console.log(doc.id, " => ", doc.data())
+        return await getDocs(q).forEach(doc => {
             return doc.data();
         });
     }catch(e){
