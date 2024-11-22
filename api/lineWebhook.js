@@ -1,6 +1,5 @@
 import { createUser } from '../db/member_repository';
 import { prefix_name } from "../json/prefix-name.json";
-import $ from "jquery";
 
 require('dotenv').config();
 
@@ -40,23 +39,12 @@ export default async function handler(req, res){
             const userMessage = message.text;
             const replyMessage = `You said: ${userMessage}`;
             const sendUserId = "Send your userId:" + source.userId
-            $.ajax({
-                method: "POST",
-                url: "python-func/cut-message.py",
-                data: {
-                    param: userMessage
-                }
-            }).done((res) => {
-                console.log(res)
-            })
             // if(source.type == 'user'){
             //     await sendMessage(source.userId, sendUserId);
             // }
             if(userMessage == 'สมัคร'){
-                const message = "กรุณากรอกข้อมูลตามรูปแบบดังนี้\nชื่อคนติิดต่อ\nเบอร์โทรติดต่อ\nที่อยู่"
-                // const res = await createUser({ line_id: source.userId });
+                const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
                 // await sendMessage(source.userId, message);
-                console.log(res)
             }
 
             if(userMessage.split(" ")[0] == "N1"){
