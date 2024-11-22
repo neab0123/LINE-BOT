@@ -22,10 +22,8 @@ async function updateUser(id, newData){
 
 async function getUser(userId){
     try{
-        const q = query(collection(db, "line-noti-register"), where("line_id", "==", userId))
-        return await getDoc(q).forEach(doc => {
-            return doc.data();
-        });
+        const q = query(collection(db, "line-noti-register"), where("line_id", "=", userId))
+        return await getDoc(q).forEach(doc => doc.data());
     }catch(e){
         
     }
