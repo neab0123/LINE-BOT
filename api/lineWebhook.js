@@ -44,15 +44,22 @@ export default async function handler(req, res){
             // }
             const findUser = await getUser(source.userId);
             console.log(findUser);
-            if(userMessage == 'สมัคร' ){
+            if(userMessage == 'สมัคร' && findUser.length == 0 ){
+                const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
-                // await sendMessage(source.userId, message);
+                await sendMessage(source.userId, message);
+            }else{
+                const message = "คุณได้ลงทะเบียนแล้ว";
+                await sendMessage(source.userId, message)
             }
 
             if(userMessage.split(" ")[0] == "N1"){
                 const spltText = userMessage.split(" ");
                 console.log(spltText)
                 const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
+            }
+            if(findUser[0].state == "awaiting for register name"){
+                const message = ""
             }
             // await sendMessage(replyToken, replyMessage);
         }
