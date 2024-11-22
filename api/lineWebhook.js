@@ -44,7 +44,7 @@ export default async function handler(req, res){
             // }
             const findUser = await getUser(source.userId);
             console.log(findUser)
-            if(userMessage == 'สมัคร' && findUser){
+            if(userMessage == 'สมัคร' ){
                 const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
                 // await sendMessage(source.userId, message);
             }
