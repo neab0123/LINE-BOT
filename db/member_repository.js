@@ -30,5 +30,6 @@ async function getUser(userId){
 }
 
 export {
-    createUser
+    createUser,
+    getUser
 }

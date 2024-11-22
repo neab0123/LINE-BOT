@@ -1,4 +1,4 @@
-import { createUser } from '../db/member_repository';
+import { createUser, getUser } from '../db/member_repository';
 import { prefix_name } from "../json/prefix-name.json";
 
 require('dotenv').config();
@@ -42,7 +42,9 @@ export default async function handler(req, res){
             // if(source.type == 'user'){
             //     await sendMessage(source.userId, sendUserId);
             // }
-            if(userMessage == 'สมัคร'){
+            const findUser = await getUser(source.userId);
+            console.log(findUser)
+            if(userMessage == 'สมัคร' && findUser){
                 const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
                 // await sendMessage(source.userId, message);
             }
