@@ -15,7 +15,6 @@ async function createUser(data){
 
 async function updateUser(id, newData){
     try{
-        console.log("Update User: ", id, newData)
         const find = await getUserId(id);
         const ref = doc(db, "line-noti-register", find)
         await updateDoc(ref, newData)
@@ -44,10 +43,8 @@ async function getUserId(lineId){
         const snapshot = await getDocs(q);
         let users = ""
         snapshot.forEach((doc) => {
-            console.log("Doc Id: ", doc.id)
             users = doc.id;
         })
-        console.log("User Id: ", users)
         return users
     }catch(e){
 
