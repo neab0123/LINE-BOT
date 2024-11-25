@@ -43,7 +43,6 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, sendUserId);
             // }
             const findUser = await getUser(source.userId);
-            console.log(userMessage == 'Register' && findUser.length == 0 )
             if(userMessage == 'Register' && findUser.length == 0 ){
                 const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "0" });
@@ -63,8 +62,22 @@ export default async function handler(req, res){
             // }
             console.log("FindUser: ", findUser[0])
             if(findUser[0].state == "0"){
-                const message = "";
-                const res = await updateUser(source.userId, { name: userMessage })
+                const message = "โปรดระบุเบอร์โทร";
+                const res = await updateUser(source.userId, { name: userMessage, state: "1" })
+                await sendMessage(source.userId, message);
+                return;
+            }
+
+            if(findUser[0].state == "1"){
+                const message = "โปรดระบุที่อยู่";
+                const res = await updateUser(source.userId, { phone: userMessage, state: "2" })
+                await sendMessage(source.userId, message);
+                return;
+            }
+
+            if(findUser[0].state == "2"){
+                const message = "Thank you";
+                const res = await updateUser(source.userId, { address: userMessage, state: "" })
                 await sendMessage(source.userId, message);
                 return;
             }
