@@ -47,6 +47,7 @@ export default async function handler(req, res){
             if(userMessage == 'Register' && findUser.length == 0 ){
                 const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "0" });
+                console.log('Response CreateUser: ', res)
                 await sendMessage(source.userId, message);
                 return;
             }
@@ -60,7 +61,7 @@ export default async function handler(req, res){
             //     console.log(spltText)
             //     const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
             // }
-            console.log(findUser[0])
+            console.log("FindUser: ", findUser[0])
             if(findUser[0].state == "0"){
                 const message = "";
                 const res = await updateUser(source.userId, { name: userMessage })
