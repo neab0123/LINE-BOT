@@ -16,7 +16,6 @@ async function createUser(data){
 async function updateUser(id, newData){
     try{
         const find = await getUserId(id);
-        console.log(find);
         const ref = doc(db, "line-noti-register", find)
         await updateDoc(ref, newData)
     }catch(e){
@@ -29,6 +28,7 @@ async function getUser(userId){
         const q = query(collection(db, "line-noti-register"), where("line_id", "==", userId))
         const snapshot =  await getDocs(q)
         let users = [];
+        console.log("Snapshot: ", snapshot);
         snapshot.forEach((doc) => {
             users.push(doc.data())
         });
