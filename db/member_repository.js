@@ -43,7 +43,7 @@ async function getUserId(lineId){
         const q = query(collection(db, "line-noti-register"), where("line_id", "==", lineId))
         const snapshot = await getDocs(q);
         let users = ""
-        snapshot.forEach((doc) => users = doc.Id)
+        snapshot.forEach((doc) => console.log("Doc Id: ", doc.id))
         console.log("User Id: ", users)
         return users
     }catch(e){
