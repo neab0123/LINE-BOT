@@ -17,11 +17,7 @@ async function updateUser(id, newData){
     try{
         const find = await getUserId(id);
         const ref = doc(db, "line-noti-register", find)
-        await updateDoc(ref, {
-            name: newData.name,
-            address: newData.address,
-            phone: newData.phone
-        })
+        await updateDoc(ref, newData)
     }catch(e){
         console.log("updateUser Error: ", e);
     }
