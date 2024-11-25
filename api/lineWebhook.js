@@ -43,7 +43,7 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, sendUserId);
             // }
             const findUser = await getUser(source.userId);
-            console.log("Find User: ", findUser)
+            console.log("Find User: ", findUser.length)
             if(userMessage == 'Register' && findUser.length == 0 ){
                 const message = "โปรดระบุชื่อ";
                 const res = await createUser({ line_id: source.userId, state: "0" });
