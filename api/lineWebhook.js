@@ -60,6 +60,7 @@ export default async function handler(req, res){
             //     console.log(spltText)
             //     const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
             // }
+            console.log(findUser[0])
             if(findUser[0].state == "0"){
                 const message = "";
                 const res = await updateUser(source.userId, { name: userMessage })
