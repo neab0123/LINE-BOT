@@ -43,10 +43,9 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, sendUserId);
             // }
             const findUser = await getUser(source.userId);
-            console.log(findUser);
-            if(userMessage == 'สมัคร' && findUser.length == 0 ){
+            if(userMessage == 'Register' && findUser.length == 0 ){
                 const message = "โปรดระบุชื่อ";
-                const res = await createUser({ line_id: source.userId, state: "awaiting for register name" });
+                const res = await createUser({ line_id: source.userId, state: "0" });
                 await sendMessage(source.userId, message);
                 return;
             }
@@ -55,14 +54,15 @@ export default async function handler(req, res){
             //     await sendMessage(source.userId, message)
             // }
 
-            if(userMessage.split(" ")[0] == "N1"){
-                const spltText = userMessage.split(" ");
-                console.log(spltText)
-                const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
-            }
-            if(findUser[0].state == "awaiting for register name"){
-                const message = ""
+            // if(userMessage.split(" ")[0] == "N1"){
+            //     const spltText = userMessage.split(" ");
+            //     console.log(spltText)
+            //     const res = await createUser({ line_id: source.userId, first_name: "", last_name: "" })
+            // }
+            if(findUser[0].state == "0"){
+                const message = "";
                 const res = await updateUser(source.userId, { name: userMessage })
+                await sendMessage(source.userId, message);
                 return;
             }
             // await sendMessage(replyToken, replyMessage);
