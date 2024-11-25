@@ -16,6 +16,7 @@ async function createUser(data){
 async function updateUser(id, newData){
     try{
         const find = await getUserId(id);
+        console.log(find);
         const ref = doc(db, "line-noti-register", find)
         await updateDoc(ref, newData)
     }catch(e){
