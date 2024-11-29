@@ -5,7 +5,6 @@ require('dotenv').config();
 
 async function sendMessage(replyToken, message){
     try{
-        console.log("CH_TOKEN:", process.env.CHANNEL_ACCESS_TOKEN)
         const response = await fetch("https://api.line.me/v2/bot/message/push", {
             method: 'POST',
             headers: {
