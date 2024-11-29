@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model hospital {
+  hospital_id   Int     @id @default(autoincrement())
+  hospital_name String? @db.VarChar(100)
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model patient {
+  patient_id Int     @id @default(autoincrement())
+  qr_code    String? @db.VarChar(20)
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model patient_user {
+  patient_id Int?
+  user_id    Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model quota {
+  quota_id    Int       @id @default(autoincrement())
+  hospital_id Int?
+  qty         Int?
+  create_date DateTime? @db.DateTime(0)
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model user {
+  user_id        Int     @id @default(autoincrement())
+  fullname       String? @db.VarChar(100)
+  address        String? @db.VarChar(255)
+  mobile         String? @db.VarChar(10)
+  line_id        String? @db.VarChar(255)
+  shipped_status Int?
+  promp_status   Int?
+}
