@@ -5,7 +5,6 @@ const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
     const events = req.body.events;
-    await SendLineMessage(req.body.events[0].source.userId, "Test")
     if(events && events.length > 0){
         const { replyToken, message, source } = events[0];
         const userMessage = message.text;
