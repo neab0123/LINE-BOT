@@ -58,7 +58,7 @@ route.post('/lineWebhook', async (req, res) => {
             await SendLineMessage(userId, replyMessage);
         }
     }
-    res.status(200);
+    res.status(200).send("OK");
 })
 
 module.exports = route;
