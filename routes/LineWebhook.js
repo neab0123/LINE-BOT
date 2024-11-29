@@ -9,30 +9,30 @@ route.post('/lineWebhook', async (req, res) => {
         const { replyToken, message, source } = events[0];
         const userMessage = message.text;
         const userId = source.userId;
+        await SendLineMessage(userId, userMessage);
+        // const findUser = await GetUserByUserId(userId);
+        // if(userMessage == "Register" && findUser == null){
+        //     const replyMessage = "โปรดระบุชื่อ";
+        //     const user = {
+        //         user_id: 0,
+        //         fullname: '',
+        //         address: '',
+        //         mobile: '',
+        //         line_id: userId,
+        //         shipped_status: 0,
+        //         promp_status: 1
+        //     }
 
-        const findUser = await GetUserByUserId(userId);
-        if(userMessage == "Register" && findUser == null){
-            const replyMessage = "โปรดระบุชื่อ";
-            const user = {
-                user_id: 0,
-                fullname: '',
-                address: '',
-                mobile: '',
-                line_id: userId,
-                shipped_status: 0,
-                promp_status: 1
-            }
+        //     const res = await CreateUser(user);
+        //     await SendLineMessage(userId, replyMessage);
+        //     return;
+        // }
 
-            const res = await CreateUser(user);
-            await SendLineMessage(userId, replyMessage);
-            return;
-        }
-
-        if(userMessage == 'Register' && findUser != null){
-            const replyMessage = "This line id is already."
-            await SendLineMessage(userId, replyMessage);
-            return;
-        }
+        // if(userMessage == 'Register' && findUser != null){
+        //     const replyMessage = "This line id is already."
+        //     await SendLineMessage(userId, replyMessage);
+        //     return;
+        // }
 
         // if(findUser != null && findUser.promp_status == 1){
         //     const replyMessage = "โปรดระบุเบอร์โทร";
