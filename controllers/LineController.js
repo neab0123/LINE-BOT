@@ -17,11 +17,9 @@ async function SendLineMessage(UserId, Message){
             })
         })
 
-        if(!response.ok){
-            console.log("Send message not success.")
-        }
+        return response.status;
     }catch(error){
-
+        return error;
     }
 }
 
