@@ -1,4 +1,4 @@
-const { default: axios } = require("axios")
+require('dotenv').config();
 
 async function SendLineMessage(UserId, Message){
     try{
