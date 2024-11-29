@@ -10,7 +10,9 @@ route.post('/lineWebhook', async (req, res) => {
             const { replyToken, message, source } = events[0];
             const userMessage = message.text;
             const userId = source.userId;
-            await SendLineMessage(userId, userMessage);
+            const response = await SendLineMessage(userId, userMessage);
+
+            res.send({ message: response })
             // const findUser = await GetUserByUserId(userId);
             // if(userMessage == "Register" && findUser == null){
             //     const replyMessage = "โปรดระบุชื่อ";
@@ -61,7 +63,7 @@ route.post('/lineWebhook', async (req, res) => {
         }
         res.status(200).send("OK");
     }catch(error){
-        res.status(400).send({ message: error.message })
+        res.status(400).send({ message: error.message });
     }
     
 })
