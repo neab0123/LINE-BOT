@@ -10,7 +10,7 @@ async function SendLineMessage(UserId, Message){
             },
             body: JSON.stringify({
                 to: UserId,
-                message: [{
+                messages: [{
                     type: "text",
                     text: Message
                 }]
