@@ -17,9 +17,13 @@ async function SendLineMessage(UserId, Message){
             })
         })
 
-        return !response.ok?"failed":"pass";
+        console.log(response)
+
+        if(!response.ok){
+            console.log(`Failed to send message: ${message}`)
+        }
     }catch(error){
-        return error;
+        throw new Error('func sendMessage Error: ', error);
     }
 }
 
