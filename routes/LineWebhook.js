@@ -55,7 +55,7 @@ route.post('/lineWebhook', async (req, res) => {
         }
         res.status(200).send("OK");
     }catch(error){
-        res.status(400).send({ message: "Error:" + error.message });
+        res.status(400).send({ message: "Error: " + error.message });
     }
     
 })
