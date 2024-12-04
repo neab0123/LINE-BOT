@@ -12,9 +12,9 @@ route.post('/lineWebhook', async (req, res) => {
             const userId = source.userId;
 
             const findUser = await GetUserByUserId(userId);
-            if(userMessage == "Register" && findUser == null){
+            if(userMessage == "Register"){
                 const replyMessage = "โปรดระบุชื่อ";
-                const user = {
+                const userData = {
                     user_id: 0,
                     fullname: '',
                     address: '',
@@ -24,7 +24,7 @@ route.post('/lineWebhook', async (req, res) => {
                     promp_status: 1
                 }
 
-                const res = await CreateUser(user);
+                const res = await CreateUser(userData);
                 await SendLineMessage(userId, replyMessage);
                 return;
             }
