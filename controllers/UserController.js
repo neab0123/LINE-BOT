@@ -1,7 +1,7 @@
-const user = require('./PrismaClient').user;
+const { user } = require('./PrismaClient');
 
 async function CreateUser(dataUser){
-    let copyUser = {
+    const copyUser = {
         user_id: 0,
         fullname: dataUser.fullname,
         address: dataUser.address,
@@ -10,7 +10,7 @@ async function CreateUser(dataUser){
         shipped_status: 0,
         promp_status: 0
     }
-    let user = await user.create({
+    const user = await user.create({
         data: copyUser
     })
 
@@ -23,7 +23,7 @@ async function GetUsers(){
 }
 
 async function GetUserByUserId(userId){
-    let findUser = user.findFirst({
+    const findUser = user.findFirst({
         where: {
             line_id: userId
         }
@@ -33,7 +33,7 @@ async function GetUserByUserId(userId){
 }
 
 async function UpdateUser(userId, dataUser) {
-    let findUser = await GetUserByUserId(userId);
+    const findUser = await GetUserByUserId(userId);
 
     if(findUser){
         findUser.fullname = dataUser.fullname;
