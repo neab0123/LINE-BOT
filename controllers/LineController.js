@@ -6,7 +6,7 @@ async function SendLineMessage(UserId, Message){
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
+                Authorization: `Bearer 43w0Ib7l6wHZ/RDPJU1pbe8h3qq5Sqr6OS4qbrUlAYcHjvPlFNGaRuf0PIdlzM/2ykWYHKQcdqDApw5xf6/Y/xZqRTWGgtf6Y5T99y7J+2kKnn/BfKTaWWvOFNV1PmIIE0wbiQe88wUkh+9DM4K/ygdB04t89/1O/w1cDnyilFU=`
             },
             body: JSON.stringify({
                 to: UserId,
