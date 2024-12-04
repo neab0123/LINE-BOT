@@ -1,5 +1,4 @@
 const express = require('express');
-const { GetUserByUserId, CreateUser, UpdateUser } = require('../controllers/UserController');
 const { SendLineMessage } = require('../controllers/LineController');
 const route = express.Router();
 
