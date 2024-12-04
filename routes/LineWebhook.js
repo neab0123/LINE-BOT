@@ -1,5 +1,6 @@
 const express = require('express');
 const { SendLineMessage } = require('../controllers/LineController');
+const { GetUserByUserId, CreateUser, UpdateUser } = require('../controllers/UserController');
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
