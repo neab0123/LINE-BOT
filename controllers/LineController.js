@@ -1,28 +1,30 @@
 require('dotenv').config();
+const axios = require('axios');
 
 async function SendLineMessage(UserId, Message){
-    // try{
-        const response = await fetch("https://api.line.me/v2/bot/message/push", {
-            method: 'POST',
+    try{
+        const response = await axios({
+            method: 'post',
+            url: 'https://api.line.me/v2/bot/message/push',
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer 43w0Ib7l6wHZ/RDPJU1pbe8h3qq5Sqr6OS4qbrUlAYcHjvPlFNGaRuf0PIdlzM/2ykWYHKQcdqDApw5xf6/Y/xZqRTWGgtf6Y5T99y7J+2kKnn/BfKTaWWvOFNV1PmIIE0wbiQe88wUkh+9DM4K/ygdB04t89/1O/w1cDnyilFU=`
+                Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
             },
-            body: JSON.stringify({
-                to: UserId,
+            data:{
+                to: replyToken,
                 messages: [{
                     type: "text",
-                    text: Message
+                    text: message
                 }]
-            })
+            }
         })
 
         if(!response.ok){
             throw new Error(`Failed to send message: ${message}`)
         }
-    // }catch(error){
-    //     throw new Error('func sendMessage Error: ', error);
-    // }
+    }catch(error){
+        throw new Error('func sendMessage Error: ', error);
+    }
 }
 
 module.exports = {
