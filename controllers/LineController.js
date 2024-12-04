@@ -11,10 +11,10 @@ async function SendLineMessage(UserId, Message){
                 Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
             },
             data:{
-                to: replyToken,
+                to: UserId,
                 messages: [{
                     type: "text",
-                    text: message
+                    text: Message
                 }]
             }
         })
