@@ -17,7 +17,7 @@ async function SendLineMessage(UserId, Message){
             })
         })
 
-        return response.status;
+        return !response.ok?"failed":"pass";
     }catch(error){
         return error;
     }
