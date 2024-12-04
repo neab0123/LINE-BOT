@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 
 async function SendLineMessage(UserId, Message){
-    try{
+    // try{
         const response = await axios({
             method: 'post',
             url: 'https://api.line.me/v2/bot/message/push',
@@ -19,12 +19,12 @@ async function SendLineMessage(UserId, Message){
             }
         })
 
-        if(!response.ok){
-            throw new Error(`Failed to send message: ${message}`)
-        }
-    }catch(error){
-        throw new Error('func sendMessage Error: ', error);
-    }
+    //     if(!response.ok){
+    //         throw new Error(`Failed to send message: ${message}`)
+    //     }
+    // }catch(error){
+    //     throw new Error('func sendMessage Error: ', error);
+    // }
 }
 
 module.exports = {
