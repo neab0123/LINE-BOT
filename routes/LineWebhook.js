@@ -59,7 +59,7 @@ route.post('/lineWebhook', async (req, res) => {
             //     const updateUser = await UpdateUser(userId, findUser);
             //     await SendLineMessage(userId, replyMessage);
             // }
-            res.status(200).send({ message: userId });
+            res.status(200).send({ message: userMessage });
         }
         res.status(200).send("OK");
     }catch(error){
