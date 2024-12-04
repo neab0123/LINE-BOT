@@ -33,11 +33,11 @@ async function sendMessage(replyToken, message){
 export default async function handler(req, res){
     if(req.method === "POST"){
         const events = req.body.events;
-        // console.log("req:", req.body)
-        // console.log("message:", req.body.events[0].message)
-        // console.log("sources:", req.body.events[0].source)
-        // console.log("source:", req.body.events[0].source)
         if(events && events.length > 0){
+            console.log("req:", req.body)
+            console.log("message:", req.body.events[0].message)
+            console.log("sources:", req.body.events[0].source)
+            console.log("source:", req.body.events[0].source)
             // replytoken for use reply api, userId for use push api
             const { replyToken, message, source } = events[0];
             const userMessage = message.text;
