@@ -10,9 +10,10 @@ route.post('/lineWebhook', async (req, res) => {
             const { replyToken, message, source } = events[0];
             const userMessage = message.text;
             const userId = source.userId;
+            const upperCaseUserMessage = userMessage.toUpperCase();
 
             const findUser = await GetUserByUserId(userId);
-            if(userMessage == "Register"){
+            if(upperCaseUserMessage == "REGISTER" && findUser == null ){
                 const replyMessage = "โปรดระบุชื่อ";
                 const userData = {
                     user_id: 0,
@@ -35,6 +36,7 @@ route.post('/lineWebhook', async (req, res) => {
                 findUser.promp_status = 2;
                 const updateUser = await UpdateUser(userId, findUser);
                 await SendLineMessage(userId, replyMessage);
+                return;
             }
 
             if(findUser != null && findUser.promp_status == 2){
@@ -43,6 +45,7 @@ route.post('/lineWebhook', async (req, res) => {
                 findUser.promp_status = 3;
                 const updateUser = await UpdateUser(userId, findUser);
                 await SendLineMessage(userId, replyMessage);
+                return;
             }
 
             if(findUser != null && findUser.promp_status == 3){
@@ -51,6 +54,11 @@ route.post('/lineWebhook', async (req, res) => {
                 findUser.promp_status = 0;
                 const updateUser = await UpdateUser(userId, findUser);
                 await SendLineMessage(userId, replyMessage);
+                return;
+            }
+
+            if(upperCaseUserMessage == "PATIENT"){
+
             }
         }
         res.status(200).send("OK");
