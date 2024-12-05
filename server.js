@@ -2,6 +2,7 @@ const express = require('express')
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./library/Swagger');
 const swaggerFile = require('./swagger_output.json');
+const core = require('cors')
 
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ const lineRoute = require('./routes/LineWebhook');
 const healthCheck = require('./routes/HealthCheck');
 
 app.use(express.json())
+app.use(core())
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 // Use route
