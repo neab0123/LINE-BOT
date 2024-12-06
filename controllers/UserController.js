@@ -1,8 +1,8 @@
-const { user } = require('./PrismaClient');
+const prisma = require('./PrismaClient');
 
 async function CreateUser(dataUser){
     const copyUser = {
-        user_id: 0,
+        // user_id: 0,
         fullname: dataUser.fullname,
         address: dataUser.address,
         mobile: dataUser.mobile,
@@ -10,20 +10,24 @@ async function CreateUser(dataUser){
         shipped_status: 0,
         promp_status: 0
     }
-    const user = await user.create({
-        data: copyUser
+
+    const user = await prisma.user.create({
+        data: copyUser,
+        select: {
+            user_id: true
+        }
     })
 
     return user;
 }
 
 async function GetUsers(){
-    const listUser = user.findMany()
+    const listUser = prisma.user.findMany()
     return listUser;
 }
 
 async function GetUserByUserId(userId){
-    const findUser = user.findFirst({
+    const findUser = prisma.user.findFirst({
         where: {
             line_id: userId
         }
@@ -42,7 +46,7 @@ async function UpdateUser(userId, dataUser) {
         findUser.promp_status = dataUser.promp_status;
         findUser.shipped_status = dataUser.shipped_status;
         findUser.line_id = dataUser.line_id;
-        let updateUser = await user.update({
+        let updateUser = await prisma.user.update({
             where: {
                 user_id: findUser.user_id
             },

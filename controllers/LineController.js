@@ -27,6 +27,10 @@ async function SendLineMessage(UserId, Message){
     // }
 }
 
+async function SendLineCoral(UserId, CoralMsg) {
+    
+}
+
 module.exports = {
     SendLineMessage
 }

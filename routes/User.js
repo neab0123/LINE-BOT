@@ -12,4 +12,9 @@ router.post('/', (req, res) => {
 
 })
 
+router.get('/{id}', (req, res) => {
+    const userId = req.params.id;
+    
+})
+
 module.exports = router;

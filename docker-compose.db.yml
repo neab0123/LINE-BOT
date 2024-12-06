@@ -6,8 +6,6 @@ services:
     container_name: mysql_db
     ports:
       - 3306:3306
-    volumes:
-      - db-data:/etc/data
     environment:
       - MYSQL_ROOT_PASSWORD=Pp6321!
       - MYSQL_DATABASE=takemehome
@@ -21,6 +19,3 @@ services:
       - MYSQL_ROOT_PASSWORD=Pp6321!
     ports:
       - 8080:80
-volumes:
-  db-data:
-    external: true
