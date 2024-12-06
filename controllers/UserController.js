@@ -7,8 +7,8 @@ async function CreateUser(dataUser){
         address: dataUser.address,
         mobile: dataUser.mobile,
         line_id: dataUser.line_id,
-        shipped_status: 0,
-        promp_status: 0
+        shipped_status: dataUser.shipped_status,
+        promp_status: dataUser.promp_status
     }
 
     const user = await prisma.user.create({
@@ -22,12 +22,12 @@ async function CreateUser(dataUser){
 }
 
 async function GetUsers(){
-    const listUser = prisma.user.findMany()
+    const listUser = await prisma.user.findMany()
     return listUser;
 }
 
 async function GetUserByUserId(userId){
-    const findUser = prisma.user.findFirst({
+    const findUser = await prisma.user.findFirst({
         where: {
             line_id: userId
         }
@@ -40,23 +40,25 @@ async function UpdateUser(userId, dataUser) {
     const findUser = await GetUserByUserId(userId);
 
     if(findUser){
-        findUser.fullname = dataUser.fullname;
-        findUser.address = dataUser.address;
-        findUser.mobile = dataUser.mobile;
-        findUser.promp_status = dataUser.promp_status;
-        findUser.shipped_status = dataUser.shipped_status;
-        findUser.line_id = dataUser.line_id;
-        let updateUser = await prisma.user.update({
+        findUser.fullname = dataUser.fullname? dataUser.fullname: findUser.fullname;
+        findUser.address = dataUser.address? dataUser.address: findUser.address;
+        findUser.mobile = dataUser.mobile? dataUser.mobile: findUser.mobile;
+        findUser.promp_status = dataUser.promp_status? dataUser.promp_status: findUser.promp_status;
+        findUser.shipped_status = dataUser.shipped_status? dataUser.shipped_status: findUser.shipped_status;
+        findUser.line_id = dataUser.line_id? dataUser.line_id : findUser.line_id;
+        const updateUser = await prisma.user.update({
             where: {
                 user_id: findUser.user_id
             },
-            data: findUser
+            data: findUser,
+            select: {
+                user_id: true
+            }
         })
         return updateUser;
     }else{
         return null;
     }
-    
 }
 
 module.exports = {

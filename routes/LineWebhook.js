@@ -1,6 +1,7 @@
 const express = require('express');
-const { SendLineMessage } = require('../controllers/LineController');
+const { SendLineMessage, SendLineCarousel } = require('../controllers/LineController');
 const { GetUserByUserId, CreateUser, UpdateUser } = require('../controllers/UserController');
+const { CreatePatient } = require('../controllers/PatientController');
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
@@ -49,7 +50,7 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             if(findUser != null && findUser.promp_status == 3){
-                const replyMessage = "Thank you";
+                const replyMessage = "เปิดใช้งานเรียบร้อย";
                 findUser.address = userMessage;
                 findUser.promp_status = 0;
                 const updateUser = await UpdateUser(userId, findUser);
@@ -57,7 +58,43 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
-            if(upperCaseUserMessage == "PATIENT"){
+            if(upperCaseUserMessage == "YOUR LOVED ONES" && findUser != null){
+                const replyCarousel = {
+                    type: "template",
+                    template: {
+                        type: "carousel",
+                        columns: [
+                            {
+                                actions: [
+                                    {
+                                        type: "message",
+                                        label: "เพิ่มคนที่คุณห่วงใย",
+                                        text: "Add Follower"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+
+                await SendLineCarousel(userId, replyCarousel);
+                return;
+            }
+
+            if(upperCaseUserMessage == "ADD FOLLOWER" && findUser != null){
+                const replyMessage = "โปรดระบุชื่อ";
+                const user_id = await UpdateUser(userId, { promp_status: 5 });
+                const patientData = {
+                    patient_id: 0,
+                    fullname: '',
+                    qr_code: ''
+                }
+                const patient_id = await CreatePatient(patientData);
+                await SendLineMessage(userId, replyMessage);
+                return;
+            }
+
+            if(findUser != null && findUser.promp_status == 5){
 
             }
         }

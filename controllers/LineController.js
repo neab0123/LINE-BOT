@@ -27,10 +27,22 @@ async function SendLineMessage(UserId, Message){
     // }
 }
 
-async function SendLineCoral(UserId, CoralMsg) {
-    
+async function SendLineCarousel(UserId, CarouselMsg) {
+    const response = await axios({
+        method: 'post',
+        url: 'https://api.line.me/v2/bot/message/push',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.CHANNEL_ACCESS_TOKEN}`
+        },
+        data:{
+            to: UserId,
+            messages: [CarouselMsg]
+        }
+    })
 }
 
 module.exports = {
-    SendLineMessage
+    SendLineMessage,
+    SendLineCarousel
 }
