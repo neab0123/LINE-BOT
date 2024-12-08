@@ -71,15 +71,7 @@ route.post('/lineWebhook', async (req, res) => {
                           action: {
                             type: "message",
                             label: "Brown",
-                            text: "Brown was selected"
-                          }
-                        },
-                        {
-                          imageUrl: "https://vignette.wikia.nocookie.net/line/images/1/10/2015-cony.png",
-                          action: {
-                            type: "uri",
-                            label: "Cony",
-                            uri: "https://developers.line.biz"
+                            text: "Add follower"
                           }
                         }
                       ]
