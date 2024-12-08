@@ -62,13 +62,14 @@ route.post('/lineWebhook', async (req, res) => {
             if(userMessage == "Your loved ones" && findUser != null && findUser.promp_status == 0){
                 const replyCarousel = {
                     type: "template",
+                    altText: "This is an image carousel template",
                     template: {
                         type: "carousel",
                         columns: [
                             {
                                 title: "Test",
                                 text: "description",
-                                actions: [
+                                action: [
                                     {
                                         type: "message",
                                         label: "เพิ่มคนที่คุณห่วงใย",
