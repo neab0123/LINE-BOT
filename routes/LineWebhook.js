@@ -66,6 +66,8 @@ route.post('/lineWebhook', async (req, res) => {
                         type: "carousel",
                         columns: [
                             {
+                                title: "Test",
+                                text: "description",
                                 actions: [
                                     {
                                         type: "message",
