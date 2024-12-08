@@ -64,11 +64,10 @@ route.post('/lineWebhook', async (req, res) => {
                     type: "template",
                     altText: "This is an image carousel template",
                     template: {
-                        type: "carousel",
+                        type: "image_carousel",
                         columns: [
                             {
-                                title: "Test",
-                                text: "description",
+                                imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
                                 action: [
                                     {
                                         type: "message",
