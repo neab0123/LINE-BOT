@@ -64,21 +64,27 @@ route.post('/lineWebhook', async (req, res) => {
                     type: "template",
                     altText: "This is an image carousel template",
                     template: {
-                        type: "image_carousel",
-                        columns: [
-                            {
-                                imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
-                                action: [
-                                    {
-                                        type: "message",
-                                        label: "เพิ่มคนที่คุณห่วงใย",
-                                        text: "Add Follower"
-                                    }
-                                ]
-                            }
-                        ]
+                      type: "image_carousel",
+                      columns: [
+                        {
+                          imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
+                          action: {
+                            type: "message",
+                            label: "Brown",
+                            text: "Brown was selected"
+                          }
+                        },
+                        {
+                          imageUrl: "https://vignette.wikia.nocookie.net/line/images/1/10/2015-cony.png",
+                          action: {
+                            type: "uri",
+                            label: "Cony",
+                            uri: "https://developers.line.biz"
+                          }
+                        }
+                      ]
                     }
-                }
+                  }
 
                 await SendLineCarousel(userId, replyCarousel);
                 return;
