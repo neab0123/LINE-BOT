@@ -84,6 +84,7 @@ route.post('/lineWebhook', async (req, res) => {
 
             if(userMessage == "Add follower" && findUser != null){
                 const replyMessage = "โปรดระบุชื่อ";
+                await SendLineMessage(userId, replyMessage);
                 const user_id = await UpdateUser(userId, { promp_status: 5 });
                 const patientData = {
                     patient_id: 0,
@@ -92,7 +93,6 @@ route.post('/lineWebhook', async (req, res) => {
                 }
                 const patient_id = await CreatePatient(patientData);
                 const user_paatient = await CreateUserPatient({ user_id: findUser.user_id, patient_id: patient_id });
-                await SendLineMessage(userId, replyMessage);
                 return;
             }
 
