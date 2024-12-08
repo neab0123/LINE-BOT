@@ -15,7 +15,7 @@ route.post('/lineWebhook', async (req, res) => {
             const upperCaseUserMessage = userMessage.toUpperCase();
 
             const findUser = await GetUserByUserId(userId);
-            if(upperCaseUserMessage == "REGISTER" && findUser == null ){
+            if(userMessage == "Register" && findUser == null ){
                 const replyMessage = "โปรดระบุชื่อ";
                 const userData = {
                     user_id: 0,
@@ -60,7 +60,7 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             await SendLineMessage(userId, upperCaseUserMessag);
-            if(upperCaseUserMessage == "YOUR LOVED ONES" && findUser != null){
+            if(userMessage == "Your loved ones" && findUser != null){
                 const replyCarousel = {
                     type: "template",
                     template: {
