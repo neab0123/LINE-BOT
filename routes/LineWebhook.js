@@ -59,6 +59,7 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
+            await SendLineMessage(userId, upperCaseUserMessag);
             if(upperCaseUserMessage == "YOUR LOVED ONES" && findUser != null){
                 const replyCarousel = {
                     type: "template",
