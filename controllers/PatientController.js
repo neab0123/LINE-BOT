@@ -2,6 +2,7 @@ const prisma = require('./PrismaClient');
 
 async function CreatePatient(dataPatient) {
     const copyData = {
+        patient_id: dataPatient.patient_id,
         fullname: dataPatient.fullname,
         qr_code: dataPatient.qr_code
     }
