@@ -82,7 +82,7 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
-            if(upperCaseUserMessage == "ADD FOLLOWER" && findUser != null){
+            if(userMessage == "Add follower" && findUser != null){
                 const replyMessage = "โปรดระบุชื่อ";
                 const user_id = await UpdateUser(userId, { promp_status: 5 });
                 const patientData = {
@@ -96,9 +96,9 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
-            if(findUser != null && findUser.promp_status == 5){
+            // if(findUser != null && findUser.promp_status == 5){
 
-            }
+            // }
         }
         res.status(200).send("OK");
     }catch(error){
