@@ -61,9 +61,22 @@ async function UpdateUser(userId, dataUser) {
     }
 }
 
+async function GetAllPatientOfUser(userId) {
+    const list_patient = await prisma.user.findMany({
+        where: {
+            user_id: userId
+        },
+        include: {
+            patient: true,
+        }
+    })
+
+    return list_patient;
+}
 module.exports = {
     GetUsers,
     CreateUser,
     GetUserByUserId,
-    UpdateUser
+    UpdateUser,
+    GetAllPatientOfUser
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const { SendLineMessage, SendLineCarousel } = require('../controllers/LineController');
 const { GetUserByUserId, CreateUser, UpdateUser } = require('../controllers/UserController');
 const { CreatePatient } = require('../controllers/PatientController');
+const { CreateUserPatient } = require('../controllers/UserPatientController');
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
@@ -90,6 +91,7 @@ route.post('/lineWebhook', async (req, res) => {
                     qr_code: ''
                 }
                 const patient_id = await CreatePatient(patientData);
+                const user_paatient = await CreateUserPatient({ user_id: findUser.user_id, patient_id: patient_id });
                 await SendLineMessage(userId, replyMessage);
                 return;
             }
