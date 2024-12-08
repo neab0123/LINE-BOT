@@ -81,6 +81,7 @@ route.post('/lineWebhook', async (req, res) => {
                 }
 
                 await SendLineCarousel(userId, replyCarousel);
+                await SendLineMessage(userId, "test carosel");
                 return;
             }
 
