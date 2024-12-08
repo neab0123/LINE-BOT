@@ -59,8 +59,7 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
-            await SendLineMessage(userId, upperCaseUserMessag);
-            if(userMessage == "Your loved ones" && findUser != null){
+            if(userMessage == "Your loved ones" && findUser != null && findUser.promp_status == 0){
                 const replyCarousel = {
                     type: "template",
                     template: {
