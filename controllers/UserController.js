@@ -40,12 +40,12 @@ async function UpdateUser(userId, dataUser) {
     const findUser = await GetUserByUserId(userId);
 
     if(findUser){
-        findUser.fullname = dataUser.fullname? dataUser.fullname: findUser.fullname;
-        findUser.address = dataUser.address? dataUser.address: findUser.address;
-        findUser.mobile = dataUser.mobile? dataUser.mobile: findUser.mobile;
-        findUser.promp_status = dataUser.promp_status? dataUser.promp_status: findUser.promp_status;
-        findUser.shipped_status = dataUser.shipped_status? dataUser.shipped_status: findUser.shipped_status;
-        findUser.line_id = dataUser.line_id? dataUser.line_id : findUser.line_id;
+        findUser.fullname = dataUser.fullname != null? dataUser.fullname: findUser.fullname;
+        findUser.address = dataUser.address != null? dataUser.address: findUser.address;
+        findUser.mobile = dataUser.mobile != null? dataUser.mobile: findUser.mobile;
+        findUser.promp_status = dataUser.promp_status != null? dataUser.promp_status: findUser.promp_status;
+        findUser.shipped_status = dataUser.shipped_status != null? dataUser.shipped_status: findUser.shipped_status;
+        findUser.line_id = dataUser.line_id != null? dataUser.line_id : findUser.line_id;
         const updateUser = await prisma.user.update({
             where: {
                 user_id: findUser.user_id
