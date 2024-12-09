@@ -44,8 +44,14 @@ async function GetPatientById(patientId) {
     return findPatient;
 }
 
+async function GetPatients() {
+    const list_patient = await prisma.patient.findMany();
+    return list_patient;
+}
+
 module.exports = {
     CreatePatient,
     GetPatientById,
-    UpdatePatient
+    UpdatePatient,
+    GetPatients
 }
