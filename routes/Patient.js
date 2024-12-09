@@ -9,7 +9,6 @@ route.get('/', async (req, res) => {
 
 route.post('/', async(req, res) => {
     const data = {
-        patient_id: 0,
         fullname: 'test',
         qr_code: 'test'
     }
