@@ -92,7 +92,7 @@ route.post('/lineWebhook', async (req, res) => {
                     qr_code: ''
                 }
                 const patient_id = await CreatePatient(patientData);
-                const user_paatient = await CreateUserPatient({ user_id: findUser.user_id, patient_id: patient_id });
+                // const user_patient = await CreateUserPatient({ user_id: user_id, patient_id: patient_id });
                 return;
             }
 
