@@ -8,22 +8,24 @@ datasource db {
 }
 
 model hospital {
-  hospital_id   Int     @id @default(autoincrement())
-  hospital_name String? @db.VarChar(100)
+  hospital_id   Int    @id @default(autoincrement())
+  hospital_name String @db.VarChar(100)
 }
 
 model patient {
   patient_id   Int            @id @default(autoincrement())
-  qr_code      String?        @db.VarChar(20)
-  fullname     String?        @db.VarChar(100)
+  fullname     String         @db.VarChar(100)
+  qr_code      String         @db.VarChar(20)
   patient_user patient_user[]
+
+  @@index([patient_id], map: "patient_id")
 }
 
 model patient_user {
   patient_id Int
   user_id    Int
-  patient    patient @relation(fields: [patient_id], references: [patient_id])
-  user       user    @relation(fields: [user_id], references: [user_id])
+  patient    patient @relation(fields: [patient_id], references: [patient_id], onDelete: Cascade, map: "FK_Patient")
+  user       user    @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK_User")
 
   @@id([patient_id, user_id])
   @@index([patient_id, user_id], map: "patient_id")
@@ -31,19 +33,21 @@ model patient_user {
 }
 
 model quota {
-  quota_id    Int       @id @default(autoincrement())
-  hospital_id Int?
-  qty         Int?
-  create_date DateTime? @db.DateTime(0)
+  quata_id    Int      @id @default(autoincrement())
+  hospital_id Int
+  qty         Int
+  create_date DateTime @db.DateTime(0)
 }
 
 model user {
   user_id        Int            @id @default(autoincrement())
-  fullname       String?        @db.VarChar(100)
-  address        String?        @db.VarChar(255)
-  mobile         String?        @db.VarChar(10)
-  line_id        String?        @db.VarChar(255)
-  shipped_status Int?
-  promp_status   Int?
+  fullname       String         @db.VarChar(100)
+  address        String         @db.VarChar(255)
+  mobile         String         @db.VarChar(10)
+  line_id        String         @db.VarChar(255)
+  shipped_status Int
+  promp_status   Int
   patient_user   patient_user[]
+
+  @@index([user_id], map: "user_id")
 }
