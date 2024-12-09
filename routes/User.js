@@ -1,5 +1,5 @@
 const express = require('express');
-const { GetUsers, GetUserByUserId, CreateUser } = require('../controllers/UserController');
+const { GetUsers, GetUserByUserId, CreateUser, GetAllPatientOfUser } = require('../controllers/UserController');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -28,6 +28,12 @@ router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
     const user = await GetUserByUserId(userId)
     res.json([userId, user]).status(200);
+})
+
+router.get('/user/:id/patients', async (req, res) => {
+    const userId = parseInt(req.params.id);
+    const patients = await GetAllPatientOfUser(userId);
+    res.json(patients).status(200);
 })
 
 module.exports = router;
