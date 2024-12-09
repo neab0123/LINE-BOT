@@ -87,12 +87,11 @@ route.post('/lineWebhook', async (req, res) => {
                 await SendLineMessage(userId, replyMessage);
                 const user_id = await UpdateUser(userId, { promp_status: 5 });
                 const patientData = {
-                    patient_id: 0,
                     fullname: 'test',
                     qr_code: 'test'
                 }
                 const patient_id = await CreatePatient(patientData);
-                // const user_patient = await CreateUserPatient({ user_id: user_id, patient_id: patient_id });
+                const user_patient = await CreateUserPatient({ user_id: user_id, patient_id: patient_id });
                 return;
             }
 

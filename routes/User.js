@@ -1,5 +1,5 @@
 const express = require('express');
-const { GetUsers, GetUserByUserId } = require('../controllers/UserController');
+const { GetUsers, GetUserByUserId, CreateUser } = require('../controllers/UserController');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -7,9 +7,21 @@ router.get('/', async (req, res) => {
     res.json(get_list).status(200);
 });
 
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
     const user_data = req.body.user;
+    const userData = {
+        user_id: 0,
+        fullname: '',
+        address: '',
+        mobile: '',
+        line_id: '',
+        shipped_status: 0,
+        promp_status: 1
+    }
 
+    const resp = await CreateUser(userData);
+
+    res.json(resp).status(200);
 })
 
 router.get('/user/:id', async (req, res) => {

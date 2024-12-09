@@ -8,18 +8,12 @@ route.get('/', async (req, res) => {
 })
 
 route.post('/', async(req, res) => {
-    try{
-        const data = {
-            patient_id: 0,
-            fullname: 'test',
-            qr_code: 'test'
-        }
-        const resp = await CreatePatient(data);
-        res.json(resp).status(200);
-    }catch(err){
-        res.json(err).status(400);
+    const data = {
+        fullname: '',
+        qr_code: ''
     }
-    
+    const resp = await CreatePatient(data);
+    res.json(respRelation).status(200);
 })
 
 module.exports = route;
