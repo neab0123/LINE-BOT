@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
-    "pull-db": "prisma db pull",
+    "pull db": "prisma db pull",
+    "migrate db": "prisma migrate dev",
     "swagger-autogen": "node swagger.js"
   },
   "author": "",
