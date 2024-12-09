@@ -7,21 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model hospital {
   hospital_id   Int     @id @default(autoincrement())
   hospital_name String? @db.VarChar(100)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model patient {
-  patient_id Int            @id @default(autoincrement())
-  qr_code    String?        @db.VarChar(20)
-  fullname   String?        @db.VarChar(100)
-  users      patient_user[]
+  patient_id   Int            @id @default(autoincrement())
+  qr_code      String?        @db.VarChar(20)
+  fullname     String?        @db.VarChar(100)
+  patient_user patient_user[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model patient_user {
   patient_id Int
   user_id    Int
@@ -33,7 +30,6 @@ model patient_user {
   @@index([user_id], map: "patient_user_user_id_fkey")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model quota {
   quota_id    Int       @id @default(autoincrement())
   hospital_id Int?
@@ -41,7 +37,6 @@ model quota {
   create_date DateTime? @db.DateTime(0)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model user {
   user_id        Int            @id @default(autoincrement())
   fullname       String?        @db.VarChar(100)
@@ -50,5 +45,5 @@ model user {
   line_id        String?        @db.VarChar(255)
   shipped_status Int?
   promp_status   Int?
-  patients       patient_user[]
+  patient_user   patient_user[]
 }
