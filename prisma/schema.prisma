@@ -19,12 +19,16 @@ model patient {
   patient_id Int     @id @default(autoincrement())
   fullname  String? @db.VarChar(100)
   qr_code    String? @db.VarChar(20)
+
+  users patient_user[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model patient_user {
   patient_id Int
+  patient   patient @relation(fields: [patient_id], references: [patient_id])
   user_id    Int
+  user       user @relation(fields: [user_id], references: [user_id])
 
   @@index([patient_id, user_id])
   @@id([patient_id, user_id])
@@ -48,4 +52,6 @@ model user {
   line_id        String? @db.VarChar(255)
   shipped_status Int?
   promp_status   Int?
+
+  patients patient_user[]
 }
