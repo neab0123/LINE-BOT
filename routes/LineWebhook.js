@@ -95,9 +95,9 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
 
-            // if(findUser != null && findUser.promp_status == 5){
-
-            // }
+            if(findUser != null && findUser.promp_status == 5){
+                const replyMessage = ""
+            }
         }
         res.status(200).send("OK");
     }catch(error){
