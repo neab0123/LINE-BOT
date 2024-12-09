@@ -11,27 +11,26 @@ datasource db {
 model hospital {
   hospital_id   Int     @id @default(autoincrement())
   hospital_name String? @db.VarChar(100)
-
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model patient {
-  patient_id Int     @id @default(autoincrement())
-  fullname  String? @db.VarChar(100)
-  qr_code    String? @db.VarChar(20)
-
-  users patient_user[]
+  patient_id Int            @id @default(autoincrement())
+  qr_code    String?        @db.VarChar(20)
+  fullname   String?        @db.VarChar(100)
+  users      patient_user[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model patient_user {
   patient_id Int
-  patient   patient @relation(fields: [patient_id], references: [patient_id])
   user_id    Int
-  user       user @relation(fields: [user_id], references: [user_id])
+  patient    patient @relation(fields: [patient_id], references: [patient_id])
+  user       user    @relation(fields: [user_id], references: [user_id])
 
-  @@index([patient_id, user_id])
   @@id([patient_id, user_id])
+  @@index([patient_id, user_id])
+  @@index([user_id], map: "patient_user_user_id_fkey")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -40,18 +39,16 @@ model quota {
   hospital_id Int?
   qty         Int?
   create_date DateTime? @db.DateTime(0)
-
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model user {
-  user_id        Int     @id @default(autoincrement())
-  fullname       String? @db.VarChar(100)
-  address        String? @db.VarChar(255)
-  mobile         String? @db.VarChar(10)
-  line_id        String? @db.VarChar(255)
+  user_id        Int            @id @default(autoincrement())
+  fullname       String?        @db.VarChar(100)
+  address        String?        @db.VarChar(255)
+  mobile         String?        @db.VarChar(10)
+  line_id        String?        @db.VarChar(255)
   shipped_status Int?
   promp_status   Int?
-
-  patients patient_user[]
+  patients       patient_user[]
 }
