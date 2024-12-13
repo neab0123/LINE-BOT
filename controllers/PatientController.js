@@ -1,6 +1,6 @@
 const prisma = require('./PrismaClient');
 
-async function CreatePatient(dataPatient) {
+async function CreatePatient(userId, dataPatient) {
     const copyData = {
         // patient_id: dataPatient.patient_id,
         fullname: dataPatient.fullname,
@@ -8,7 +8,21 @@ async function CreatePatient(dataPatient) {
     }
 
     const patient = await prisma.patient.create({
-        data: copyData,
+        data: {
+            fullname: dataPatient.fullname,
+            qr_code: dataPatient.qr_code,
+            patient_user: {
+                create: [
+                    {
+                        user: {
+                            connect: {
+                                user_id: userId
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         select: {
             patient_id: true
         }
