@@ -67,7 +67,7 @@ async function GetAllPatientOfUser(userId) {
             user_id: userId
         },
         include: {
-            patients: {
+            patient_user: {
                 include: {
                     patient: true
                 }
