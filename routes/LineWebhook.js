@@ -77,18 +77,9 @@ route.post('/lineWebhook', async (req, res) => {
                       ]
                     }
                   }
-                const patient = await GetAllPatientOfUser(findUser.user_id);
-                const list_patient = patient?.patient_user;
-                list_patient.map((data) => {
-                    replyCarousel.template.columns.unshift({
-                        imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
-                          action: {
-                            type: "message",
-                            label: data.fullname,
-                            text: data.fullname
-                        }
-                    })
-                })
+                // const patient = await GetAllPatientOfUser(findUser.user_id);
+                // const list_patient = patient?.patient_user;
+                
                 await SendLineCarousel(userId, replyCarousel);
                 return;
             }
