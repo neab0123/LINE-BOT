@@ -84,7 +84,8 @@ route.post('/lineWebhook', async (req, res) => {
                         imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
                           action: {
                             type: "message",
-                            label: data.qr_code,
+                            label: data.fullname,
+                            text: data.fullname
                         }
                     })
                 })
