@@ -36,6 +36,12 @@ async function GetUserByUserId(userId){
     return findUser;
 }
 
+/**
+ * 
+ * @param {String} userId this is line id
+ * @param {Object} dataUser this is object that to update user data
+ * @returns 
+ */
 async function UpdateUser(userId, dataUser) {
     const findUser = await GetUserByUserId(userId);
 
@@ -62,7 +68,7 @@ async function UpdateUser(userId, dataUser) {
 }
 
 async function GetAllPatientOfUser(userId) {
-    const list_patient = await prisma.user.findMany({
+    const list_patient = await prisma.user.findFirst({
         where: {
             user_id: userId
         },
@@ -77,6 +83,7 @@ async function GetAllPatientOfUser(userId) {
 
     return list_patient;
 }
+
 module.exports = {
     GetUsers,
     CreateUser,
