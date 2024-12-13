@@ -1,6 +1,6 @@
 const express = require('express');
 const { SendLineMessage, SendLineCarousel } = require('../controllers/LineController');
-const { GetUserByUserId, CreateUser, UpdateUser } = require('../controllers/UserController');
+const { GetUserByUserId, CreateUser, UpdateUser, GetAllPatientOfUser } = require('../controllers/UserController');
 const { CreatePatient } = require('../controllers/PatientController');
 const { CreateUserPatient } = require('../controllers/UserPatientController');
 const route = express.Router();
@@ -71,18 +71,28 @@ route.post('/lineWebhook', async (req, res) => {
                           action: {
                             type: "message",
                             label: "Brown",
-                            text: "Add follower"
+                            text: "Add Caretaker"
                           }
                         }
                       ]
                     }
                   }
-
+                const patient = await GetAllPatientOfUser(findUser.user_id);
+                const list_patient = patient?.patient_user;
+                list_patient.map((data) => {
+                    replyCarousel.template.columns.unshift({
+                        imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
+                          action: {
+                            type: "message",
+                            label: data.qr_code,
+                        }
+                    })
+                })
                 await SendLineCarousel(userId, replyCarousel);
                 return;
             }
 
-            if(userMessage == "Add follower" && findUser != null){
+            if(userMessage == "Add Caretaker" && findUser != null){
                 const replyMessage = "โปรดระบุชื่อ";
                 const user_id = await UpdateUser(userId, { promp_status: 5 });
                 const patientData = {
@@ -97,6 +107,7 @@ route.post('/lineWebhook', async (req, res) => {
 
             if(findUser != null && findUser.promp_status == 5){
                 const replyMessage = ""
+                
             }
         }
         res.status(200).send("OK");
