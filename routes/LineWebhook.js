@@ -1,7 +1,7 @@
 const express = require('express');
 const { SendLineMessage, SendLineCarousel } = require('../controllers/LineController');
 const { GetUserByUserId, CreateUser, UpdateUser, GetAllPatientOfUser } = require('../controllers/UserController');
-const { CreatePatient } = require('../controllers/PatientController');
+const { CreatePatient, GetPatientByUserId, UpdatePatient } = require('../controllers/PatientController');
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
@@ -76,9 +76,19 @@ route.post('/lineWebhook', async (req, res) => {
                       ]
                     }
                   }
-                // const patient = await GetAllPatientOfUser(findUser.user_id);
-                // const list_patient = patient?.patient_user;
-                
+                const patient = await GetAllPatientOfUser(findUser.user_id);
+                const list_patient = patient?.patient_user;
+                list_patient?.map((data) => {
+                    replyCarousel.template.columns.unshift({
+                        imageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
+                        action: {
+                          type: "message",
+                          label: data.patient.fullname,
+                          text: data.patient.fullname
+                        }
+                    })
+                })
+
                 await SendLineCarousel(userId, replyCarousel);
                 return;
             }
@@ -97,8 +107,14 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             if(findUser != null && findUser.promp_status == 5){
-                const replyMessage = ""
-                
+                const replyMessage = "Success update username."
+                const lastest_patient = await GetPatientByUserId(findUser.user_id);
+                const patientData = {
+                    fullname: userMessage
+                }
+                const response = await UpdatePatient(lastest_patient.patient_id, patientData);
+                const update_user = await UpdateUser(userId, { promp_status: 0 });
+                return;
             }
         }
         res.status(200).send("OK");

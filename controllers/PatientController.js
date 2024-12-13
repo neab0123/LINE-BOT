@@ -64,9 +64,30 @@ async function GetPatients() {
     return list_patient;
 }
 
+async function GetPatientByUserId(userId) {
+    const patinet_id = await prisma.patient.findFirst({
+        where: {
+            patient_user:{
+                some: {
+                    user_id: userId
+                }
+            }
+        },
+        orderBy: {
+            patient_id: 'desc'
+        },
+        select: {
+            patient_id: true
+        }
+    })
+
+    return patinet_id;
+}
+
 module.exports = {
     CreatePatient,
     GetPatientById,
     UpdatePatient,
-    GetPatients
+    GetPatients,
+    GetPatientByUserId
 }
