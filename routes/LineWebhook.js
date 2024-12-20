@@ -90,27 +90,28 @@ route.post('/lineWebhook', async (req, res) => {
                 })
 
                 const replyMessage2 = {
-                    type: "carousel",
-                    contents: [
-                      {
-                        type: "bubble",
-                        size: "hecto",
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
-                            {
-                              type: "text",
-                              text: "hello, world",
-                              align: "center"
-                            }
-                          ]
-                        }
+                    type: "flex",
+                    altText: "this is a flex message",
+                    contents: {
+                      type: "bubble",
+                      body: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "hello"
+                          },
+                          {
+                            type: "text",
+                            text: "world"
+                          }
+                        ]
                       }
-                    ]
+                    }
                   }
 
-                // await SendLineCarousel(userId, replyCarousel);
+                await SendLineCarousel(userId, replyCarousel);
                 await SendLineCarousel(userId, replyMessage2);
                 return;
             }
