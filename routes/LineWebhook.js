@@ -91,45 +91,29 @@ route.post('/lineWebhook', async (req, res) => {
 
                 const replyMessage2 = {
                     type: "carousel",
-                    altText: "This is flexible template",
                     contents: [
-                        {
-                            type: "bubble",
-                            body: {
-                                type: "box",
-                                layout: "vertical",
-                                contents: [
-                                    {
-                                        type: "box",
-                                        layout: "vertical",
-                                        spacing: "sm",
-                                        contents: [
-                                            {
-                                                type: "text",
-                                                text: "เพิ่มคนที่คุณห่วงใย",
-                                                color: "#38B6FF",
-                                                align: "center",
-                                                wrap: "true"
-                                            },
-                                            {
-                                                type: "text",
-                                                text: "คนที่อาจพลัดหลง",
-                                                color: "#38B6FF",
-                                                align: "center",
-                                                wrap: "true"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            action: {
-                                type: "message",
-                                label: "action",
-                                text: "hello"
+                      {
+                        type: "bubble",
+                        size: "hecto",
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: "hello, world",
+                              align: "center"
                             }
+                          ]
+                        },
+                        action: {
+                          type: "message",
+                          label: "action",
+                          text: "hello"
                         }
+                      }
                     ]
-                }
+                  }
 
                 // await SendLineCarousel(userId, replyCarousel);
                 await SendLineCarousel(userId, replyMessage2);
