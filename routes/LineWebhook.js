@@ -92,23 +92,42 @@ route.post('/lineWebhook', async (req, res) => {
                 const replyMessage2 = {
                     type: "flex",
                     altText: "this is a flex message",
-                    contents: {
-                      type: "bubble",
-                      body: {
-                        type: "box",
-                        layout: "vertical",
-                        contents: [
-                          {
-                            type: "text",
-                            text: "hello"
-                          },
-                          {
-                            type: "text",
-                            text: "world"
-                          }
-                        ]
-                      }
-                    }
+                    contents: [
+                        {
+                            type: "bubble",
+                            body: {
+                                type: "box",
+                                layout: "vertical",
+                                contents: [
+                                {
+                                    type: "text",
+                                    text: "hello"
+                                },
+                                {
+                                    type: "text",
+                                    text: "world"
+                                }
+                                ]
+                            }
+                        },
+                        {
+                            type: "bubble",
+                            body: {
+                                type: "box",
+                                layout: "vertical",
+                                contents: [
+                                {
+                                    type: "text",
+                                    text: "hello"
+                                },
+                                {
+                                    type: "text",
+                                    text: "world"
+                                }
+                                ]
+                            }
+                        }
+                    ]
                   }
 
                 await SendLineCarousel(userId, replyCarousel);
