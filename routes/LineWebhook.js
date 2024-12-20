@@ -15,7 +15,7 @@ route.post('/lineWebhook', async (req, res) => {
 
             const findUser = await GetUserByUserId(userId);
             if(userMessage == "Register" && findUser == null ){
-                const replyMessage = "โปรดระบุชื่อ";
+                const replyMessage = "โปรดระบุชื่อที่ต้องการสมัครค่ะ";
                 const userData = {
                     user_id: 0,
                     fullname: '',
@@ -32,7 +32,7 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             if(findUser != null && findUser.promp_status == 1){
-                const replyMessage = "โปรดระบุเบอร์โทร";
+                const replyMessage = "โปรดระบุเบอร์โทรของคุณเพื่อสมัครค่ะ";
                 findUser.fullname = userMessage;
                 findUser.promp_status = 2;
                 const updateUser = await UpdateUser(userId, findUser);
@@ -41,7 +41,7 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             if(findUser != null && findUser.promp_status == 2){
-                const replyMessage = "โปรดระบุที่อยู่";
+                const replyMessage = "โปรดระบุที่อยู่เพื่อสมัครการใช้งานค่ะ";
                 findUser.mobile = userMessage;
                 findUser.promp_status = 3;
                 const updateUser = await UpdateUser(userId, findUser);
@@ -50,7 +50,7 @@ route.post('/lineWebhook', async (req, res) => {
             }
 
             if(findUser != null && findUser.promp_status == 3){
-                const replyMessage = "เปิดใช้งานเรียบร้อย";
+                const replyMessage = "เปิดใช้งานเรียบร้อยค่ะ";
                 findUser.address = userMessage;
                 findUser.promp_status = 0;
                 const updateUser = await UpdateUser(userId, findUser);
@@ -89,7 +89,108 @@ route.post('/lineWebhook', async (req, res) => {
                     })
                 })
 
+                const replyMessage2 = {
+                    type: "carousel",
+                    altText: "This is flexible template",
+                    contents: [
+                        {
+                            type: "bubble",
+                            hero: {
+                                type: "image",
+                                url: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
+                                size: "full",
+                                aspectMode: "cover",
+                                aspectRation: "20:13"
+                            },
+                            body: {
+                                type: "box",
+                                layout: "vertical",
+                                contents: [
+                                    {
+                                        type: "box",
+                                        layout: "baseline",
+                                        contents: [
+                                            {
+                                                type: "text",
+                                                text: "ย่าคะนิ้ง",
+                                                wrap: "true"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            footer: {
+                                type: "box",
+                                layout: "vertical",
+                                spacing: "sm",
+                                contents: [
+                                    {
+                                        type: "button",
+                                        action: {
+                                            type: "text",
+                                            label: "เปลี่ยนชื่อ",
+                                            text: "เปลี่ยนชื่อ"
+                                        }
+                                    },
+                                    {
+                                        type: "button",
+                                        action: {
+                                            type: "text",
+                                            label: "จัดการผู้ดูแล",
+                                            text: "จัดการผู้ดูแล"
+                                        }
+                                    },
+                                    {
+                                        type: "button",
+                                        action: {
+                                            type: "text",
+                                            label: "ยกเลิกการใช้งาน",
+                                            text: "ยกเลิกการใช้งาน"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: "bubble",
+                            body: {
+                                type: "box",
+                                layout: "vertical",
+                                contents: [
+                                    {
+                                        type: "box",
+                                        layout: "vertical",
+                                        spacing: "sm",
+                                        contents: [
+                                            {
+                                                type: "text",
+                                                text: "เพิ่มคนที่คุณห่วงใย",
+                                                color: "#38B6FF",
+                                                align: "center",
+                                                wrap: "true"
+                                            },
+                                            {
+                                                type: "text",
+                                                text: "คนที่อาจพลัดหลง",
+                                                color: "#38B6FF",
+                                                align: "center",
+                                                wrap: "true"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            action: {
+                                type: "message",
+                                label: "action",
+                                text: "hello"
+                            }
+                        }
+                    ]
+                }
+
                 await SendLineCarousel(userId, replyCarousel);
+                await SendLineCarousel(userId, replyMessage2);
                 return;
             }
 
