@@ -121,7 +121,7 @@ route.post('/lineWebhook', async (req, res) => {
                     ]
                   }
 
-                await SendLineCarousel(userId, replyCarousel);
+                // await SendLineCarousel(userId, replyCarousel);
                 await SendLineCarousel(userId, replyMessage2);
                 return;
             }
