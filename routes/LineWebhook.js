@@ -105,11 +105,6 @@ route.post('/lineWebhook', async (req, res) => {
                               align: "center"
                             }
                           ]
-                        },
-                        action: {
-                          type: "message",
-                          label: "action",
-                          text: "hello"
                         }
                       }
                     ]
