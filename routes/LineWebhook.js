@@ -95,64 +95,6 @@ route.post('/lineWebhook', async (req, res) => {
                     contents: [
                         {
                             type: "bubble",
-                            hero: {
-                                type: "image",
-                                url: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
-                                size: "full",
-                                aspectMode: "cover",
-                                aspectRation: "20:13"
-                            },
-                            body: {
-                                type: "box",
-                                layout: "vertical",
-                                contents: [
-                                    {
-                                        type: "box",
-                                        layout: "baseline",
-                                        contents: [
-                                            {
-                                                type: "text",
-                                                text: "ย่าคะนิ้ง",
-                                                wrap: "true"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            footer: {
-                                type: "box",
-                                layout: "vertical",
-                                spacing: "sm",
-                                contents: [
-                                    {
-                                        type: "button",
-                                        action: {
-                                            type: "text",
-                                            label: "เปลี่ยนชื่อ",
-                                            text: "เปลี่ยนชื่อ"
-                                        }
-                                    },
-                                    {
-                                        type: "button",
-                                        action: {
-                                            type: "text",
-                                            label: "จัดการผู้ดูแล",
-                                            text: "จัดการผู้ดูแล"
-                                        }
-                                    },
-                                    {
-                                        type: "button",
-                                        action: {
-                                            type: "text",
-                                            label: "ยกเลิกการใช้งาน",
-                                            text: "ยกเลิกการใช้งาน"
-                                        }
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            type: "bubble",
                             body: {
                                 type: "box",
                                 layout: "vertical",
