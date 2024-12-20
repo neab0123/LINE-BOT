@@ -5,7 +5,7 @@ const { CreatePatient, GetPatientByUserId, UpdatePatient } = require('../control
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
-    try{
+    // try{
         const events = req.body.events;
         if(events && events.length > 0){
             const { replyToken, message, source } = events[0];
@@ -150,11 +150,10 @@ route.post('/lineWebhook', async (req, res) => {
                 return;
             }
         }
-        res.status(200).send("OK");
-    }catch(error){
-        res.status(400).send({ message: "Error: " + error.message });
-    }
-    
+    //     res.status(200).send("OK");
+    // }catch(error){
+    //     res.status(400).send({ message: "Error: " + error.message });
+    // }
 })
 
 module.exports = route;
