@@ -90,48 +90,28 @@ route.post('/lineWebhook', async (req, res) => {
                 })
 
                 const replyMessage2 = {
-                    type: "carousel",
-                    altText: "This is flexible template",
-                    contents: [
-                        {
-                            type: "bubble",
-                            body: {
-                                type: "box",
-                                layout: "vertical",
-                                contents: [
-                                    {
-                                        type: "box",
-                                        layout: "vertical",
-                                        spacing: "sm",
-                                        contents: [
-                                            {
-                                                type: "text",
-                                                text: "เพิ่มคนที่คุณห่วงใย",
-                                                color: "#38B6FF",
-                                                align: "center",
-                                                wrap: "true"
-                                            },
-                                            {
-                                                type: "text",
-                                                text: "คนที่อาจพลัดหลง",
-                                                color: "#38B6FF",
-                                                align: "center",
-                                                wrap: "true"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            action: {
-                                type: "message",
-                                label: "action",
-                                text: "hello"
-                            }
-                        }
-                    ]
-                }
+                    type: "flex",
+                    altText: "this is a flex message",
+                    contents: {
+                      type: "bubble",
+                      body: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "hello"
+                          },
+                          {
+                            type: "text",
+                            text: "world"
+                          }
+                        ]
+                      }
+                    }
+                  }
 
-                // await SendLineCarousel(userId, replyCarousel);
+                await SendLineCarousel(userId, replyCarousel);
                 await SendLineCarousel(userId, replyMessage2);
                 return;
             }
