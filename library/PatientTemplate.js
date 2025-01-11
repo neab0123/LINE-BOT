@@ -21,6 +21,11 @@ function PatientCard(patient){
         imageBackgroundColor: "#FFFFFF",
         title: patient.patient.fullname,
         text: "",
+        defaultAction: {
+            type: "text",
+            label: "Test",
+            text: "Test"
+        },
         actions: [
             {
                 type: "text",
