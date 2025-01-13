@@ -1,7 +1,7 @@
 function PatientTemplate(arrayPatient){
     let corauselTemplate = {
-        type: "",
-        altText: "",
+        type: "template",
+        altText: "this is a carousel template",
         template: {
             type: "corausel",
             columns: arrayPatient.map((data) => {
@@ -17,7 +17,7 @@ function PatientTemplate(arrayPatient){
 
 function PatientCard(patient){
     return {
-        thumbnailImageUrl: "",
+        thumbnailImageUrl: "https://vignette.wikia.nocookie.net/line/images/b/bb/2015-brown.png",
         imageBackgroundColor: "#FFFFFF",
         title: patient.patient.fullname,
         text: "",
