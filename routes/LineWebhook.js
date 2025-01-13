@@ -2,6 +2,7 @@ const express = require('express');
 const { SendLineMessage, SendLineCarousel } = require('../controllers/LineController');
 const { GetUserByUserId, CreateUser, UpdateUser, GetAllPatientOfUser } = require('../controllers/UserController');
 const { CreatePatient, GetPatientByUserId, UpdatePatient } = require('../controllers/PatientController');
+const { PatientTemplate } = require('../library/PatientTemplate');
 const route = express.Router();
 
 route.post('/lineWebhook', async (req, res) => {
@@ -120,9 +121,10 @@ route.post('/lineWebhook', async (req, res) => {
                       }
                     ]
                   }
-
+                const replyCarousel2 = PatientTemplate(list_patient);
                 // await SendLineCarousel(userId, replyCarousel);
-                await SendLineCarousel(userId, replyMessage2);
+                // await SendLineCarousel(userId, replyMessage2);
+                await SendLineCarousel(userId, replyCarousel2);
                 return;
             }
 
